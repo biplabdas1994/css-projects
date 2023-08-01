@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Emoji Generator</title>
+</head>
+
+<body>
+    <div id="emoji-container"></div>
+    <script src="https://unpkg.com/fetch"></script>
+    <script>
+        const emojiAPI = "https://api.open-emoji.org/v1/emoji/";
+
+        function getRandomEmoji() {
+            const emojiID = Math.floor(Math.random() * 1000);
+            return fetch(emojiAPI + emojiID).then(response => response.json()).then(emoji => emoji.name);
+        }
+
+        const emojiContainer = document.getElementById("emoji-container");
+
+        const generateEmojiButton = document.createElement("button");
+        generateEmojiButton.textContent = "Generate Emoji";
+        generateEmojiButton.addEventListener("click", () => {
+            emojiContainer.textContent = getRandomEmoji();
+        });
+
+        document.body.appendChild(generateEmojiButton);
+    </script>
+</body>
+
+</html>
